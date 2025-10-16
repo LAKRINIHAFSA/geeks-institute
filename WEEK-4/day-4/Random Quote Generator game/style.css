@@ -1,0 +1,49 @@
+body {
+  background: linear-gradient(135deg, #f8a5c2, #f78fb3);
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  width: 400px;
+}
+
+.quote-box {
+  margin-bottom: 20px;
+}
+
+button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #f78fb3;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #f8a5c2;
+}
+
+input {
+  margin: 5px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 80%;
+}
+
+.nav-buttons {
+  margin-top: 10px;
+}

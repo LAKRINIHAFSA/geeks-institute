@@ -1,0 +1,59 @@
+
+body {
+    margin: 0;/*Remove default margin*/
+    padding: 0; /* remove default padding */
+    height: 100vh; /* full viewport height */
+    background-image: url('IMAGE/IMG.png'); /* background image */
+    background-size: cover; /* make image cover entire body */
+    background-position: center; /* center the image */
+    background-repeat: no-repeat; /* do not repeat image */
+    position: relative; /* for overlay positioning */
+    color: white;  /* text color */
+}
+
+/* gradient overlay */
+.overlay {
+    position: absolute; /* place overlay on top of body */
+    top: 0;
+    left: 0;
+    width: 100%;  /* full width */
+    height: 100%;  /* full height */
+    background: rgba(182, 17, 138, 0.4); /* pink transparent */
+    z-index: 0;  /* behind text and buttons */
+}
+ 
+
+h1,.drum-container {
+    position: relative;  /* position above overlay */
+    z-index: 1; /* make text and buttons appear on top */
+}
+
+
+
+h1 {
+    color: #e353a7;
+    margin-top: 20px;
+}
+
+.drum-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    gap: 15px;
+}
+
+.drum {
+    background-color: #e61e82;
+    border: none;
+    border-radius: 10px;
+    padding: 20px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.drum:active {
+    transform: scale(0.95);
+    background-color: #ea91b9;
+}

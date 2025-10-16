@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Forms Exercises 1 & 2</title>
+</head>
+<body>
+  <h1>Exercise 1 - GET Method</h1>
+  <form method="GET" action="index.html">
+    <p>Name: <input type="text" name="nameGET"></p>
+    <p>Message:<br><textarea name="messageGET"></textarea></p>
+    <p><button type="submit">Send (GET)</button></p>
+  </form>
+
+  <h1>Exercise 2 - POST Method</h1>
+  <form method="POST" action="index.html">
+    <p>Name: <input type="text" name="namePOST"></p>
+    <p>Message:<br><textarea name="messagePOST"></textarea></p>
+    <p><button type="submit">Send (POST)</button></p>
+  </form>
+
+  <!-- Comments:
+    1. GET form: data appears in URL as query parameters
+    2. POST form: data appears in request body (use Network tab to check)
+    3. Different names for inputs avoid conflicts
+  -->
+</body>
+</html>

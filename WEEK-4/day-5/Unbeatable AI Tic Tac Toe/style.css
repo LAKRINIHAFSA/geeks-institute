@@ -1,0 +1,75 @@
+/* Root colors */
+:root{
+  --bg: #0f1724;
+  --card: rgba(255,255,255,0.04);
+  --accent: #00e5ff;
+  --muted: #9aa4b2;
+}
+
+/* General styles */
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: radial-gradient(circle at 10% 10%, rgba(0,229,255,0.06), transparent 10%), 
+              linear-gradient(180deg, #071029 0%, #071326 50%, #071029 100%);
+  font-family: 'Orbitron', sans-serif;
+  color:#fff;
+  padding:20px;
+}
+
+.container{
+  text-align:center;
+  max-width:600px;
+}
+
+/* Buttons */
+.btn{
+  margin:5px;
+  padding:8px 14px;
+  border-radius:10px;
+  border:2px solid rgba(255,255,255,0.08);
+  background:transparent;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  transition: all .2s ease;
+}
+.btn:hover{ border-color:var(--accent); }
+
+/* Board */
+.board{
+  display:grid;
+  grid-template-columns: repeat(3, 100px);
+  gap:10px;
+  justify-content:center;
+  margin:20px 0;
+}
+
+.cell{
+  width:100px;
+  height:100px;
+  background: var(--card);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:48px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.2s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+.cell:hover{ transform: scale(1.05);
+ box-shadow: 0 12px 24px rgba(55, 205, 236, 0.895), 0 0 8px rgba(0,229,255,0.3); }
+/* highlight winning line */
+.cell.win {
+  background: linear-gradient(90deg, rgba(0,229,255,0.12), rgba(0,229,255,0.06));
+  box-shadow: 0 12px 30px rgba(68, 237, 1, 0.927);
+  transform: scale(1.06);}
+/* Status message */
+.status{
+  margin:10px 0;
+  font-size:18px;
+}

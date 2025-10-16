@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Recrutement</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="chat-container">
+        <h1>Chatbot Recrutement </h1>
+        <div id="chatbox">
+            <!-- Messages will appear here -->
+        </div>
+        <input type="text" id="userInput" placeholder="Write your question here."
+>
+        <button onclick="sendMessage()">SEND</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById("userInput");
+            const message = input.value.trim();
+            if (!message) return;
+
+            const chatbox = document.getElementById("chatbox");
+
+            // Display user message
+            const userMsgDiv = document.createElement("div");
+            userMsgDiv.className = "message user";
+            userMsgDiv.textContent = message;
+            chatbox.appendChild(userMsgDiv);
+
+            // Scroll to bottom
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            // Clear input
+            input.value = "";
+
+            // Send to server
+            fetch("/ask", {
+                method: "POST",
+                body: new URLSearchParams({message: message})
+            })
+            .then(res => res.json())
+            .then(data => {
+                const botMsgDiv = document.createElement("div");
+                botMsgDiv.className = "message bot";
+                botMsgDiv.textContent = data.response;
+                chatbox.appendChild(botMsgDiv);
+
+                // Scroll to bottom
+                chatbox.scrollTop = chatbox.scrollHeight;
+            });
+        }
+    </script>
+</body>
+</html>
