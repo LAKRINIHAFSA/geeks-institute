@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunrise Times - Promise.all()</title>
+</head>
+<body style="font-family: sans-serif; text-align: center; margin-top: 30px;">
+
+  <h2> Get Sunrise Times for Two Cities</h2>
+  <p>Enter the latitude and longitude for each city, then click the button!</p>
+
+  <script>
+    // Daily Challenge: Get sunrise hour from two cities using Promise.all() and the sunrise-sunset.org API
+
+    // Create form elements for latitude and longitude of two cities
+    const form = document.createElement("form");
+    form.style.marginBottom = "12px";
+
+    const lat1 = document.createElement("input");
+    lat1.type = "number";
+    lat1.step = "any";
+    lat1.placeholder = "Latitude City 1";
+    const lng1 = document.createElement("input");
+    lng1.type = "number";
+    lng1.step = "any";
+    lng1.placeholder = "Longitude City 1";
+    const lat2 = document.createElement("input");
+    lat2.type = "number";
+    lat2.step = "any";
+    lat2.placeholder = "Latitude City 2";
+    const lng2 = document.createElement("input");
+    lng2.type = "number";
+    lng2.step = "any";
+    lng2.placeholder = "Longitude City 2";
+    const btn = document.createElement("button");
+    btn.type = "submit";
+    btn.textContent = "Show Sunrise Times";
+
+    form.appendChild(lat1);
+    form.appendChild(lng1);
+    form.appendChild(lat2);
+    form.appendChild(lng2);
+    form.appendChild(btn);
+    document.body.appendChild(form);
+
+    // Display area for the results
+    const resultDiv = document.createElement("div");
+    document.body.appendChild(resultDiv);
+
+    // Function to fetch sunrise time for a city
+    function getSunrise(lat, lng) {
+      // Build API url for sunrise-sunset.org
+      const apiURL = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`;
+      // Fetch data and return promise that resolves with sunrise hour
+      return fetch(apiURL)
+        .then(response => {
+          if (!response.ok) throw new Error("Network response was not ok");
+          return response.json();
+        })
+        .then(data => {
+          // Return only the sunrise time
+          return data.results.sunrise;
+        });
+    }
+
+    // Listen for form submission
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // Read latitude and longitude from inputs
+      const city1Lat = lat1.value;
+      const city1Lng = lng1.value;
+      const city2Lat = lat2.value;
+      const city2Lng = lng2.value;
+
+      // Use Promise.all to fetch both at the same time
+      Promise.all([
+        getSunrise(city1Lat, city1Lng),
+        getSunrise(city2Lat, city2Lng)
+      ])
+        .then(([sunrise1, sunrise2]) => {
+          // Only display when both resolved
+          resultDiv.innerHTML =
+            `<strong>City 1 Sunrise:</strong> ${new Date(sunrise1).toLocaleTimeString()}<br>` +
+            `<strong>City 2 Sunrise:</strong> ${new Date(sunrise2).toLocaleTimeString()}`;
+        })
+        .catch(error => {
+          // Log and display any error
+          resultDiv.textContent = "Error: " + error.message;
+        });
+    });
+
+    // Example (Paris and New York):
+    // Paris: Latitude: 48.864716, Longitude: 2.349014
+    // New York: Latitude: 40.730610, Longitude: -73.935242
+  </script>
+</body>
+</html>
