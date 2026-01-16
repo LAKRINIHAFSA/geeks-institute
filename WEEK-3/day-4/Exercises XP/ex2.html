@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Work with Forms</title>
+</head>
+<body>
+    <form id="myForm">
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="firstname"><br>
+        <label for="lname">Last name:</label>
+        <input type="text" id="lname" name="lastname"><br>
+        <input type="submit" value="Submit" id="submit">
+    </form>
+    <ul class="usersAnswer"></ul>
+
+    <script>
+        // 1. Retrieve the form and console.log it
+        const myForm = document.getElementById('myForm');
+        console.log(myForm);
+
+        // 2. Retrieve the inputs by their id and console.log them
+        const fnameInput = document.getElementById('fname');
+        const lnameInput = document.getElementById('lname');
+        console.log(fnameInput);
+        console.log(lnameInput);
+
+        // 3. Retrieve the inputs by their name attribute and console.log them
+        const inputByFirstName = document.querySelector('input[name="firstname"]');
+        const inputByLastName = document.querySelector('input[name="lastname"]');
+        console.log(inputByFirstName);
+        console.log(inputByLastName);
+
+        // 4. When the user submits the form
+        myForm.addEventListener('submit', function(event) {
+            // Use event.preventDefault() to prevent the form from reloading the page
+            // This allows us to handle the form submission with JavaScript instead
+            event.preventDefault();
+
+            // Get the values of the input tags
+            const firstname = fnameInput.value;
+            const lastname = lnameInput.value;
+
+            // Make sure that they are not empty
+            if (firstname.trim() !== '' && lastname.trim() !== '') {
+                // Create an li per input value
+                const li1 = document.createElement('li');
+                li1.textContent = firstname;
+                
+                const li2 = document.createElement('li');
+                li2.textContent = lastname;
+
+                // Append them to the ul with class "usersAnswer"
+                const ulElement = document.querySelector('.usersAnswer');
+                ulElement.appendChild(li1);
+                ulElement.appendChild(li2);
+
+                // Clear the form after submission
+                myForm.reset();
+            }
+        });
+    </script>
+</body>
+</html>

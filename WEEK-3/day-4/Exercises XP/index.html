@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Change the article</title>
+</head>
+<body>
+    <article>
+        <h1>Some Facts</h1>
+        <h2>The Chocolate</h2>
+        <h3>History of the chocolate</h3>
+        <p>Chocolate is made from tropical Theobroma cacao tree seeds. Its earliest use dates back to the Olmec civilization in Mesoamerica.</p>
+        <p>After the European discovery of the Americas, chocolate became very popular in the wider world, and its demand exploded.</p>
+        <p>Chocolate has since become a popular food product that millions enjoy every day, thanks to its unique, rich, and sweet taste.</p>
+        <p>But what effect does eating chocolate have on our health?</p>
+    </article>
+    <button id="boldBtn">Make text bold</button>
+
+    <script>
+       // Exercise 1 : Change the article
+        // 1. Retrieve the h1 and console.log it
+        const h1Element = document.querySelector('h1');
+        console.log(h1Element);
+
+        // 2. Remove the last paragraph in the article tag
+        const paragraphs = document.querySelectorAll('article p');
+        paragraphs[paragraphs.length - 1].remove();
+
+        // 3. Add event listener to h2 to change background color to red when clicked
+        const h2Element = document.querySelector('h2');
+        h2Element.addEventListener('click', function() {
+            this.style.backgroundColor = 'red';
+        });
+
+        // 4. Add event listener to h3 to hide it when clicked (display: none)
+        const h3Element = document.querySelector('h3');
+        h3Element.addEventListener('click', function() {
+            this.style.display = 'none';
+        });
+
+        // 5. Add button that makes all paragraphs text bold
+        const boldButton = document.getElementById('boldBtn');
+        boldButton.addEventListener('click', function() {
+            const allParagraphs = document.querySelectorAll('article p');
+            allParagraphs.forEach(paragraph => {
+                paragraph.style.fontWeight = 'bold';
+            });
+        });
+
+        // BONUS 1: When hovering on h1, set random font size between 0-100px
+        h1Element.addEventListener('mouseover', function() {
+            const randomSize = Math.random() * 100;
+            this.style.fontSize = randomSize + 'px';
+        });
+
+        // BONUS 2: When hovering on 2nd paragraph, it should fade out
+        const secondParagraph = document.querySelectorAll('article p')[1];
+        secondParagraph.style.transition = 'opacity 0.5s ease-in-out';
+        secondParagraph.addEventListener('mouseover', function() {
+            this.style.opacity = '0';
+        });
+        secondParagraph.addEventListener('mouseout', function() {
+            this.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>

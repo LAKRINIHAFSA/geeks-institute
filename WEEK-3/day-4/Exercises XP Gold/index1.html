@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select a kind of Music</title>
+</head>
+<body>
+
+<select id="genres">
+  <option value="rock">Rock</option>
+  <option value="blues">Blues</option>
+  <option value="classic" selected>Classic</option>
+</select>
+<script>
+// Get the select element
+const genreSelect = document.getElementById('genres');
+
+// Display the value of the selected option
+console.log('Selected genre:', genreSelect.value);
+
+// Add event listener to show the selected value when it changes
+genreSelect.addEventListener('change', function() {
+  console.log('You selected:', this.value);
+});
+
+// The newly added option "Classic" is selected by default using the 'selected' attribute
+
+</script>
+</body>
+</html>

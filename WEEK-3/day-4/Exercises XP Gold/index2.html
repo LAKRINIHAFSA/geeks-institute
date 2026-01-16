@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete colors</title>
+</head>
+<body>
+<form>
+  <select id="colorSelect">
+    <option>Red</option>
+    <option>Green</option>
+    <option>White</option>
+    <option>Black</option>
+  </select>
+  <input type="button" value="Select and Remove" id="removeBtn">
+</form>
+
+<script>
+// JavaScript
+// Get the select element and button
+const colorSelect = document.getElementById('colorSelect');
+const removeBtn = document.getElementById('removeBtn');
+
+// Add click event listener to the button
+removeBtn.addEventListener('click', removecolor);
+
+// Function to remove the selected color from the dropdown list
+function removecolor() {
+  // Get the index of the selected option
+  const selectedIndex = colorSelect.selectedIndex;
+  
+  // Remove the selected option if it exists
+  if (selectedIndex >= 0) {
+    colorSelect.remove(selectedIndex);
+  }
+}
+
+</script>
+</body>
+</html>

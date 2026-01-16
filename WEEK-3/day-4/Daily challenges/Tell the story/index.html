@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Challenge: Mad Libs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        
+        form {
+            margin-bottom: 30px;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px 0;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        #story {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 20px;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mad Libs</h1>
+
+    <form id="libForm">
+        <label for="noun">Noun:</label>
+        <input type="text" id="noun" placeholder="Enter a noun" required>
+        
+        <label for="adjective">Adjective:</label>
+        <input type="text" id="adjective" placeholder="Enter an adjective" required>
+        
+        <label for="person">Someone's Name:</label>
+        <input type="text" id="person" placeholder="Enter a name" required>
+        
+        <label for="verb">Verb:</label>
+        <input type="text" id="verb" placeholder="Enter a verb" required>
+        
+        <label for="place">A place:</label>
+        <input type="text" id="place" placeholder="Enter a place" required>
+        
+        <button type="submit" id="lib-button">Lib it!</button>
+    </form>
+
+    <p>Generated story:</p>
+    <div id="story"></div>
+    
+    <button id="shuffle-button" style="display: none;">Shuffle Story</button>
+
+    <script>
+        // Get form and story elements
+const form = document.getElementById('libForm');
+const storyDiv = document.getElementById('story');
+const shuffleButton = document.getElementById('shuffle-button');
+
+// Store current values
+let currentValues = {};
+
+// Array of different story templates
+const storyTemplates = [
+    // Story 1
+    function(values) {
+        return `Once upon a time, there was a ${values.adjective} ${values.noun}. ${values.person} found it in ${values.place}. They decided to ${values.verb} it immediately!`;
+    },
+    // Story 2
+    function(values) {
+        return `In a land far away called ${values.place}, a ${values.adjective} ${values.noun} appeared. ${values.person} was amazed and started to ${values.verb} with all their might!`;
+    },
+    // Story 3
+    function(values) {
+        return `${values.person} went to ${values.place} one sunny day and discovered a ${values.adjective} ${values.noun}. Without thinking twice, they began to ${values.verb}!`;
+    }
+];
+
+// Handle form submission
+form.addEventListener('submit', function(event) {
+    // Prevent default form submission behavior
+    event.preventDefault();
+    
+    // Get all input values
+    const noun = document.getElementById('noun').value.trim();
+    const adjective = document.getElementById('adjective').value.trim();
+    const person = document.getElementById('person').value.trim();
+    const verb = document.getElementById('verb').value.trim();
+    const place = document.getElementById('place').value.trim();
+    
+    // Validate that all fields are not empty
+    if (!noun || !adjective || !person || !verb || !place) {
+        alert('Please fill in all fields!');
+        console.log('Error: One or more fields are empty');
+        return;
+    }
+    
+    // Store the values for shuffle functionality
+    currentValues = {
+        noun: noun,
+        adjective: adjective,
+        person: person,
+        verb: verb,
+        place: place
+    };
+    
+    // Display the initial story
+    displayRandomStory();
+    
+    // Show the shuffle button after first submission
+    shuffleButton.style.display = 'block';
+    
+    console.log('Form submitted successfully with values:', currentValues);
+});
+
+// Function to display a random story
+function displayRandomStory() {
+    // Get a random story template
+    const randomIndex = Math.floor(Math.random() * storyTemplates.length);
+    const selectedTemplate = storyTemplates[randomIndex];
+    
+    // Generate story using the selected template
+    const story = selectedTemplate(currentValues);
+    
+    // Display the story
+    storyDiv.textContent = story;
+    console.log('Story displayed:', story);
+}
+
+// Handle shuffle button click
+shuffleButton.addEventListener('click', function() {
+    // Display a new random story with the same values
+    displayRandomStory();
+    console.log('Story shuffled');
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a shopping list</title>
+</head>
+<body>
+<div id="root"></div>
+<script>
+// Create an empty shopping list array
+let shoppingList = [];
+
+// Get the root container
+const root = document.getElementById('root');
+
+// Create and add the form to the DOM
+const form = document.createElement('form');
+const input = document.createElement('input');
+const addBtn = document.createElement('input');
+
+input.type = 'text';
+input.placeholder = 'Enter item to buy';
+input.id = 'itemInput';
+
+addBtn.type = 'button';
+addBtn.value = 'AddItem';
+addBtn.id = 'addBtn';
+
+form.appendChild(input);
+form.appendChild(addBtn);
+
+// Create the ClearAll button
+const clearBtn = document.createElement('input');
+clearBtn.type = 'button';
+clearBtn.value = 'ClearAll';
+clearBtn.id = 'clearBtn';
+
+// Create a list to display items
+const itemList = document.createElement('ul');
+itemList.id = 'itemList';
+
+// Add form, list, and button to the DOM
+root.appendChild(form);
+root.appendChild(itemList);
+root.appendChild(clearBtn);
+
+// Add event listener to the AddItem button
+addBtn.addEventListener('click', addItem);
+
+// Add event listener to the ClearAll button
+clearBtn.addEventListener('click', clearAll);
+
+// Function to add a new item to the shopping list
+function addItem() {
+  // Get the value from the input field
+  const itemValue = input.value.trim();
+  
+  // Check if the input is not empty
+  if (itemValue !== '') {
+    // Add the item to the shopping list array
+    shoppingList.push(itemValue);
+    
+    // Create a list item element
+    const li = document.createElement('li');
+    li.textContent = itemValue;
+    
+    // Add the list item to the DOM
+    itemList.appendChild(li);
+    
+    // Clear the input field
+    input.value = '';
+  }
+}
+
+// Function to clear all items from the shopping list
+function clearAll() {
+  // Clear the shopping list array
+  shoppingList = [];
+  
+  // Clear all list items from the DOM
+  itemList.innerHTML = '';
+}
+
+</script>
+</body>
+
+</html>

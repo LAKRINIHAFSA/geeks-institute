@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Volume of a Sphere</title>
+    <style>
+        body {
+            padding-top: 30px;
+        }
+        label, input {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <p>Input radius value and get the volume of a sphere.</p>
+    <form id="MyForm">
+        <label for="radius">Radius</label>
+        <input type="text" name="radius" id="radius" required="">
+        <label for="volume">Volume</label>
+        <input type="text" name="volume" id="volume">
+        <input type="submit" value="Calculate" id="submit">
+    </form>
+
+    <script>
+        // Get form elements
+        const form = document.getElementById('MyForm');
+        const radiusInput = document.getElementById('radius');
+        const volumeInput = document.getElementById('volume');
+
+        // Add event listener to form submission
+        form.addEventListener('submit', function(event) {
+            // Prevent the form from reloading the page
+            event.preventDefault();
+
+            // Get the radius value
+            const radius = parseFloat(radiusInput.value);
+
+            // Check if the radius is a valid number
+            if (!isNaN(radius) && radius > 0) {
+                // Calculate the volume of a sphere using the formula: V = (4/3) * π * r³
+                const volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
+
+                // Display the result in the volume input field
+                volumeInput.value = volume.toFixed(2);
+            } else {
+                alert('Please enter a valid radius value');
+            }
+        });
+    </script>
+</body>
+</html>
